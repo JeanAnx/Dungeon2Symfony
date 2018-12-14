@@ -2,6 +2,7 @@
 
 namespace POE\Controller;
 
+use POE\Entity\Character;
 use POE\Repository\CharacterRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +16,6 @@ class GameController extends AbstractController
     public function index(CharacterRepository $repo): Response
     {
         $characters = $repo->findAll();
-
         return $this->render('game/index.html.twig', [
             'characters' => $characters,
         ]);
@@ -24,19 +24,15 @@ class GameController extends AbstractController
     /**
      * @Route("/game/{id}", requirements={"id"="\d+"})
      */
-    public function show(CharacterRepository $repo, $id)
+    public function show(Character $character)
     {
-        $character = $repo->find($id);
-
-        /**
-         * Si pas de perso trouvé en base, lève une exception, erreur 404
-         */
-        if (!$character) {
-            throw $this->createNotFoundException();
-        }
-
         return $this->render('game/hero.html.twig', [
             'character' => $character,
         ]);
+    }
+
+    public function fight(Character $character, CharacterRepository $repo)
+    {
+        $attacker = $repo->find();
     }
 }
