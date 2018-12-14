@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Captain Igloo must die {% endblock %}
+
+{#
+Redéfinition du bloc body qui a été déclaré dans le template parent
+#}
+
+{% block body %}
+        <style>
+                ul li { text-decoration: none}
+        </style>
+<ul>
+    {%  for character in characters %}
+        <li><a href="#">{{ loop.index }} - {{  character.name }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}
