@@ -20,4 +20,23 @@ class GameController extends AbstractController
             'characters' => $characters,
         ]);
     }
+
+    /**
+     * @Route("/game/{id}", requirements={"id"="\d+"})
+     */
+    public function show(CharacterRepository $repo, $id)
+    {
+        $character = $repo->find($id);
+
+        /**
+         * Si pas de perso trouvé en base, lève une exception, erreur 404
+         */
+        if (!$character) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->render('game/hero.html.twig', [
+            'character' => $character,
+        ]);
+    }
 }

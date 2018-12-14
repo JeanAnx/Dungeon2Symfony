@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Captain Igloo must die {% endblock %}
+
+{#
+Redéfinition du bloc body qui a été déclaré dans le template parent
+#}
+
+{% block body %}
+
+    <section class="heroCard">
+        <h2>{{ character.name }}</h2>
+    <hr>
+        <div class="blocStat">
+            <div><i class="fas fa-heart"></i><p>Life</p></div>
+            <progress max={{ character.currentLife }} value={{ character.maxLife }}></progress>
+
+            <div><p>{{ character.currentLife }} / {{ character.maxLife }}   PV</p></div>
+        </div>
+    <hr>
+
+        <div>
+            <div><i class="fas fa-bolt"></i><p>Energy</p></div>
+            <progress max={{ character.currentEnergy }} value={{ character.maxEnergy }}></progress>
+            <div><p>{{ character.currentEnergy }} / {{ character.maxEnergy }} PE</p></div>
+        </div>
+
+    <hr>
+
+        <div class="attackDefense">
+            <div>
+                <h3><i class="fas fa-fist-raised"></i></h3>
+                <p>{{ character.attack }}</p>
+            </div>
+            <div>
+                <h3><i class="fas fa-shield-alt"></i></h3>
+                <p>{{ character.defense }}</p>
+            </div>
+        </div>
+
+{% endblock %}

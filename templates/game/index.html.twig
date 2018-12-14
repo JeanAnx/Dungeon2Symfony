@@ -12,7 +12,7 @@ Redéfinition du bloc body qui a été déclaré dans le template parent
         </style>
 <ul>
     {%  for character in characters %}
-        <li><a href="#">{{ loop.index }} - {{  character.name }}</a></li>
+        <li><a href="{{ path('poe_game_show', {id: character.id}) }}">{{ loop.index }} - {{  character.name }}</a></li>
     {% endfor %}
 </ul>
 {% endblock %}
