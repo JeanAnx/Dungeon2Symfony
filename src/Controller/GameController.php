@@ -31,8 +31,34 @@ class GameController extends AbstractController
         ]);
     }
 
-    public function fight(Character $character, CharacterRepository $repo)
+    /**
+     * @Route("/game/fight")
+     */
+    public function fight(CharacterRepository $repo , Character $attacker, Character $defender )
     {
-        $attacker = $repo->find();
+
+        $attacker = $repo->find(21);
+        $defender = $repo->find(22);
+
+        $actions = [];
+
+        $attackerDice = random_int(1,100);
+        $defenderDice = random_int(1,100);
+
+        while (true) {
+
+            if ($attackerDice > $defenderDice) {
+                $defender->wound($attacker->attack);
+                array_push($actions, $attacker . ' frappe ' . $defender . ' avec sa lourde épée');
+                array_push($actions, $defender . ' perd ' . $attacker->attack);
+            }
+
+        }
+
+
+        return $this->render('game/fight', ['actions' => $actions ,
+            'attacker' => $attacker ,
+            'defenser' => $defender,
+        ]);
     }
 }

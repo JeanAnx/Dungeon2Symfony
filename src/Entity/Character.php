@@ -157,4 +157,9 @@ class Character
 
         return $this;
     }
+
+    public function wound($attack)
+    {
+        $this->currentLife -= $attack;
+    }
 }
